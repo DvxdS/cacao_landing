@@ -1,0 +1,125 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Palette — Institutionnel Premium Cacao */
+  --color-cacao-700: #4f3322;
+  --color-cacao-800: #3b2417;
+  --color-cacao-900: #2a1810;
+
+  --color-ivory-50: #faf7f0;
+  --color-ivory-100: #f5f0e6;
+  --color-ivory-200: #ede5d3;
+
+  --color-forest-500: #3e7a54;
+  --color-forest-600: #2d5f3f;
+  --color-forest-700: #1f4630;
+
+  --color-gold-400: #d9b84a;
+  --color-gold-500: #c9a227;
+  --color-gold-600: #a8861d;
+
+  /* Polices — Étape 6 : Marcellus (display) + Hanken Grotesk (sans) */
+  --font-display: 'Marcellus', ui-serif, Georgia, serif;
+  --font-sans: 'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif;
+
+  /* Échelle éditoriale */
+  --text-h1: clamp(3rem, 7vw, 5.5rem);
+  --text-h2: clamp(2rem, 4vw, 3rem);
+}
+
+/*
+ * Base reset dans @layer base — assure que les utilities Tailwind
+ * (text-ivory-50, etc.) gagnent la priorité de cascade sur ces règles.
+ */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    /* scroll-behavior pris en charge par Lenis (smooth) ou natif en reduced-motion */
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.65;
+    color: var(--color-cacao-800);
+    background: var(--color-ivory-100);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /*
+   * Marcellus n'a qu'une graisse (400) : la hiérarchie passe par la taille
+   * et le tracking, JAMAIS par un faux gras synthétisé par le navigateur.
+   */
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    color: var(--color-cacao-900);
+    letter-spacing: -0.015em;
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+@layer components {
+  /* Containers — étape 6.2 */
+  .container-page {
+    width: min(100% - 3rem, 1440px);
+    margin-inline: auto;
+  }
+  .container-wide {
+    width: min(100% - 2rem, 1600px);
+    margin-inline: auto;
+  }
+
+  /* Eyebrow — petit label uppercase qui ouvre chaque section */
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--color-gold-600);
+  }
+
+  /* Texte courant — largeur de lecture confortable */
+  .prose-narrow {
+    max-width: 65ch;
+  }
+
+  /* Wrapper pour reveal masqué SplitText (overflow: hidden par ligne) */
+  .reveal-mask > div {
+    overflow: hidden;
+  }
+}
+
+/* Focus visible cohérent (a11y) */
+:where(a, button, [role='button'], input, textarea, select):focus-visible {
+  outline: 2px solid var(--color-forest-600);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Désactiver les animations pour les utilisateurs sensibles au mouvement */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
