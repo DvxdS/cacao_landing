@@ -86,6 +86,7 @@ export function Hero() {
         src={hero.image.src}
         alt={hero.image.alt}
         loading="eager"
+        fetchPriority="high"
         placeholderLabel="Photo : plantation"
         className="absolute inset-0 -z-10 w-full h-full"
       />

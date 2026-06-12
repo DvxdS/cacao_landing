@@ -59,6 +59,7 @@ export function VideoSection() {
             loop
             playsInline
             preload="metadata"
+            poster={video.poster}
             aria-label={video.title}
             className="absolute inset-0 w-full h-full object-cover"
           >

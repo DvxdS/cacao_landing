@@ -18,9 +18,9 @@
   --color-gold-500: #c9a227;
   --color-gold-600: #a8861d;
 
-  /* Polices — Étape 6 : Marcellus (display) + Hanken Grotesk (sans) */
-  --font-display: 'Marcellus', ui-serif, Georgia, serif;
-  --font-sans: 'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif;
+  /* Polices — essai Montserrat partout (titres + corps) */
+  --font-display: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
 
   /* Échelle éditoriale */
   --text-h1: clamp(3rem, 7vw, 5.5rem);
@@ -51,16 +51,16 @@
   }
 
   /*
-   * Marcellus n'a qu'une graisse (400) : la hiérarchie passe par la taille
-   * et le tracking, JAMAIS par un faux gras synthétisé par le navigateur.
+   * Montserrat a de vraies graisses : la hiérarchie repose sur le poids (600)
+   * et un tracking serré, Montserrat respirant moins que Marcellus en grand.
    */
   h1,
   h2,
   h3 {
     font-family: var(--font-display);
-    font-weight: 400;
+    font-weight: 600;
     color: var(--color-cacao-900);
-    letter-spacing: -0.015em;
+    letter-spacing: -0.02em;
     line-height: 1.1;
     margin: 0;
   }

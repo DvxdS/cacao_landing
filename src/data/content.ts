@@ -159,6 +159,10 @@ export const video = {
     'Quelques minutes pour comprendre les enjeux d’un cacao durable et équitable, raconté depuis les plantations de la Nawa.',
   videoSrc: '/media/12000309-hd_1920_1080_30fps.mp4',
   videoType: 'video/mp4',
+  // Affiche : montrée pendant le chargement (desktop) et à la place de la vidéo sur mobile
+  // pour éviter de télécharger ~11 Mo sur téléphone.
+  poster: '/media/item9.jpg',
+  posterAlt: 'Plantation de cacao de la coopérative dans la région de la Nawa',
 } as const;
 
 export const testimonials = {

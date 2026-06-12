@@ -23,13 +23,14 @@ export function Navbar() {
   const close = () => setOpen(false);
 
   return (
-    <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-ivory-50/95 backdrop-blur border-b border-cacao-900/10'
-          : 'bg-transparent'
-      }`}
-    >
+    <>
+      <header
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? 'bg-ivory-50/95 backdrop-blur border-b border-cacao-900/10'
+            : 'bg-transparent'
+        }`}
+      >
       <div className="container-page h-16 md:h-20 flex items-center justify-between">
         <a
           href="#top"
@@ -86,11 +87,12 @@ export function Navbar() {
         >
           <Menu size={26} />
         </button>
-      </div>
+        </div>
+      </header>
 
       {open && (
         <div
-          className="fixed inset-0 z-50 bg-cacao-900 text-ivory-50 flex flex-col"
+          className="fixed inset-0 z-[60] bg-cacao-900 text-ivory-50 flex flex-col"
           role="dialog"
           aria-modal="true"
           aria-label="Menu"
@@ -135,6 +137,6 @@ export function Navbar() {
           </nav>
         </div>
       )}
-    </header>
+    </>
   );
 }

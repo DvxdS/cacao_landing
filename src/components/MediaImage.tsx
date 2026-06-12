@@ -7,6 +7,7 @@ type Props = {
   placeholderLabel?: string;
   loading?: 'lazy' | 'eager';
   rounded?: string;
+  fetchPriority?: 'high' | 'low' | 'auto';
 };
 
 /**
@@ -20,6 +21,7 @@ export function MediaImage({
   placeholderLabel,
   loading = 'lazy',
   rounded = '',
+  fetchPriority = 'auto',
 }: Props) {
   const [errored, setErrored] = useState(false);
 
@@ -48,6 +50,8 @@ export function MediaImage({
       src={src}
       alt={alt}
       loading={loading}
+      decoding="async"
+      fetchPriority={fetchPriority}
       onError={() => setErrored(true)}
       className={`block object-cover ${rounded} ${className}`.trim()}
     />

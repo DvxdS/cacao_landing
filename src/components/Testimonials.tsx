@@ -1,12 +1,14 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 import { testimonials } from '../data/content';
+import { isReducedMotion } from '../lib/gsap';
 
 export function Testimonials() {
   const trackRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
+  const pausedRef = useRef(false);
 
   const updateProgress = useCallback(() => {
     const el = trackRef.current;
@@ -38,18 +40,47 @@ export function Testimonials() {
     };
   }, [updateProgress]);
 
-  const step = (dir: 1 | -1) => {
+  const step = useCallback((dir: 1 | -1) => {
     const el = trackRef.current;
     if (!el) return;
     const card = el.querySelector<HTMLElement>('[data-testimonial-card]');
     const cardW = card ? card.offsetWidth + 24 /* gap-6 */ : el.clientWidth * 0.9;
     el.scrollBy({ left: dir * cardW, behavior: 'smooth' });
+  }, []);
+
+  // Défilement automatique (7 s), pause au survol/focus, désactivé en reduced-motion.
+  useEffect(() => {
+    if (isReducedMotion()) return;
+    const el = trackRef.current;
+    if (!el) return;
+    const id = window.setInterval(() => {
+      if (pausedRef.current) return;
+      const max = el.scrollWidth - el.clientWidth;
+      if (max <= 0) return;
+      if (el.scrollLeft >= max - 4) {
+        el.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        step(1);
+      }
+    }, 7000);
+    return () => window.clearInterval(id);
+  }, [step]);
+
+  const pause = () => {
+    pausedRef.current = true;
+  };
+  const resume = () => {
+    pausedRef.current = false;
   };
 
   return (
     <section
       id="testimonials"
       aria-label="Témoignages"
+      onMouseEnter={pause}
+      onMouseLeave={resume}
+      onFocusCapture={pause}
+      onBlurCapture={resume}
       className="relative isolate bg-ivory-200 text-cacao-800 py-24 md:py-32 overflow-hidden"
     >
       <div
@@ -109,18 +140,18 @@ export function Testimonials() {
               role="group"
               aria-roledescription="slide"
               aria-label={`Témoignage ${i + 1} sur ${testimonials.items.length}`}
-              className="snap-start shrink-0 w-[88%] sm:w-[420px] md:w-[420px] bg-white border border-cacao-800/[0.08] p-8 md:p-10 flex flex-col"
+              className="snap-start shrink-0 w-[80%] sm:w-[420px] md:w-[420px] bg-white border border-cacao-800/[0.08] p-6 md:p-10 flex flex-col"
             >
               <Quote
-                size={36}
+                size={32}
                 strokeWidth={1}
-                className="text-gold-500/60 mb-6"
+                className="text-gold-500/60 mb-4 md:mb-6 md:w-9 md:h-9"
                 aria-hidden
               />
-              <blockquote className="font-display italic text-cacao-900 text-[19px] md:text-[21px] leading-snug flex-1">
+              <blockquote className="font-display italic text-cacao-900 text-[16px] md:text-[21px] leading-snug flex-1">
                 « {t.quote} »
               </blockquote>
-              <div className="mt-8 pt-6 border-t border-cacao-800/[0.08] flex items-center gap-4">
+              <div className="mt-6 pt-5 md:mt-8 md:pt-6 border-t border-cacao-800/[0.08] flex items-center gap-4">
                 <span className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
                   <img
                     src={t.avatar}
