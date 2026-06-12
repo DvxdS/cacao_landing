@@ -126,6 +126,7 @@ export const traceability = {
   intro:
     'Toutes nos parcelles sont géolocalisées et nos lots sont identifiés à chaque étape. Nous fournissons à nos acheteurs européens la documentation complète exigée par le règlement EUDR.',
   eudrLogo: '/media/logo-complainte-eudr__plan-de-travail-1.png',
+  mapImage: '/media/cartographie.png',
   points: [
     { icon: 'MapPin', text: '100 % des parcelles géolocalisées' },
     { icon: 'ScanLine', text: 'Chaque lot identifié et suivi' },
@@ -142,8 +143,11 @@ export const gallery = {
     { src: '/media/item6.avif', alt: 'Fèves de cacao en cours de séchage solaire', span: 'tall' },
     { src: '/media/item2.jpg', alt: 'Producteur ouvrant une cabosse à la machette', span: 'normal' },
     { src: '/media/tiem4.jpg', alt: 'Sacs de cacao prêts à l’expédition', span: 'normal' },
+    { src: '/media/item10.jpg', alt: 'Détail de cabosses fraîchement récoltées', span: 'normal' },
     { src: '/media/item5.jfif', alt: 'Productrices en réunion de groupement', span: 'normal' },
+    { src: '/media/item11.jpg', alt: 'Producteurs au cœur de la plantation', span: 'tall' },
     { src: '/media/item8.jpg', alt: 'Entrepôt et activité quotidienne de la coopérative', span: 'wide' },
+    { src: '/media/item12.jpg', alt: 'Vue large sur les hectares cultivés par la coopérative', span: 'wide' },
     { src: '/media/steptodown.com836479.jpg', alt: 'Détail de fèves de cacao triées à la main', span: 'normal' },
   ] as const,
 } as const;
